@@ -60,7 +60,6 @@ class CarService {
     }
   }
 
-  @override
   Future<List<Car>> findAll() async {
     try {
       final rows = await (await _database).query(tableName);

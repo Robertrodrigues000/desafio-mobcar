@@ -4,7 +4,6 @@ import 'package:desafio_mobcar/models/car_year.dart';
 import 'package:desafio_mobcar/models/model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class BrandsModelsProvider extends ChangeNotifier {
   Dio _dio = Dio();
@@ -33,10 +32,8 @@ class BrandsModelsProvider extends ChangeNotifier {
 
     final mapData = response.data['modelos'];
 
-    final models = Future.value(
-      (mapData as List).map((map) => Model.fromMap(map)).toList(),
-    );
-    _models = models as List<Model>;
+    final models = (mapData as List).map((map) => Model.fromMap(map)).toList();
+    _models = models;
     notifyListeners();
     return models;
   }
@@ -64,8 +61,8 @@ class BrandsModelsProvider extends ChangeNotifier {
     required num idModel,
     required String carYear,
   }) async {
-     final response = await _dio.get(
-        'https://parallelum.com.br/fipe/api/v1/carros/marcas/$idBrand/modelos/$idModel/anos/$carYear');
+    final response =
+        await _dio.get('https://parallelum.com.br/fipe/api/v1/carros/marcas/$idBrand/modelos/$idModel/anos/$carYear');
     final carPrice = CarPrice.fromMap(response.data);
     _carPrice = carPrice;
     return carPrice;

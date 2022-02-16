@@ -1,11 +1,10 @@
 import 'package:desafio_mobcar/models/car.dart';
 import 'package:desafio_mobcar/service/cars_service.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
 
 class CarsProvider extends ChangeNotifier {
-  static CarsProvider of(BuildContext context, {listen = true}) =>
-      Provider.of<CarsProvider>(context, listen: listen);
+
+      CarsProvider({required BuildContext context, listen = true});
       CarService _carService = CarService();
 
   Future<List<Car>> get _data async =>
@@ -31,9 +30,5 @@ class CarsProvider extends ChangeNotifier {
     final deleted = await _carService.delete(car);
     notifyListeners();
     return deleted;
-  }
-
-    Future<Car> findById({required num id}) async {
-    return await _carService.findById(id: id);
   }
 }

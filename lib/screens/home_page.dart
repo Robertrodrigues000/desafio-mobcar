@@ -1,8 +1,8 @@
-import 'package:desafio_mobcar/constants/colors.dart';
+import 'package:desafio_mobcar/constants/constants.dart';
 import 'package:desafio_mobcar/models/car.dart';
+import 'package:desafio_mobcar/utils/actions_utils.dart';
 import 'package:desafio_mobcar/widgets/button.dart';
-import 'package:desafio_mobcar/widgets/car_form_widget.dart';
-import 'package:desafio_mobcar/widgets/details_car_dialog.dart';
+import 'package:desafio_mobcar/widgets/cars_list.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey _scaffoldKey = new GlobalKey();
-  List carList = ["FIAT", "Uno"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,91 +35,73 @@ class _HomePageState extends State<HomePage> {
         child: Text("data"),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
+          Row(
             children: [
-              Positioned(
-                right: 12,
-                bottom: 12,
-                child: Button(
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(12, 8, 12, 0),
+                      child: Text(
+                        'Olá, Cliente',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Veículos cadastrados',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Button(
                             text: 'Adicionar Novo',
                             onTap: () {
-                              showCarFormDialog(
-                                context,
-                                car: Car(),
-                              );
+                              ActionsUtils.showCarFormDialog(context, car: Car(), key: widget.key);
                             },
                           ),
-              ),
-              ListTile(
-                title: Text("teste"),
-                subtitle: Text("subtitle"),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: const Divider(color: Colors.black, height: 1),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          Divider(
-            endIndent: 12,
-            indent: 12,
-            color: Colors.black,
-          ),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (BuildContext context, int index) {
-                if (index < carList.length)
-                  return ListTile(
-                    title: Text(carList[index]),
-                    subtitle: Text("subtitle"),
-                    trailing: Icon(
-                      MaterialCommunityIcons.dots_vertical,
-                      color: Colors.black,
-                    ),
-                  );
-                else
-                  return SizedBox(height: 110);
-              },
-              itemCount: carList.length + 1,
-              separatorBuilder: (context, index) {
-                return Divider(
-                  endIndent: 12,
-                  indent: 12,
-                  color: Colors.black,
-                );
-              },
-            ),
-          ),
+          Expanded(child: CarsListPage(key: widget.key)),
         ],
       ),
       bottomNavigationBar: Container(
-        height: 60,
+        height: 50,
         color: Colors.black,
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            "2020 All rights reserved to Mobcar",
-            style: TextStyle(color: AppColors.infoBlue),
-          ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('© ', style: TextStyle(color: Colors.blue, fontSize: 22)),
+            Text(
+              ' 2020. All rights reserved to Mobcar.',
+              style: TextStyle(color: Colors.blue, fontSize: 14),
+            ),
+          ],
         ),
       ),
-    );
-  }
-
-  void showCarFormDialog(
-    BuildContext context, {
-    required Car car,
-    bool isInsertMode = true,
-  }) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return DetailsCarDialogWidget(
-          child: CarFormWidget(
-            car: car,
-            isInsertMode: isInsertMode,
-          ),
-          car: car,
-        );
-      },
     );
   }
 }

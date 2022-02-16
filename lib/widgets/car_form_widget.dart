@@ -1,3 +1,4 @@
+import 'package:desafio_mobcar/constants/constants.dart';
 import 'package:desafio_mobcar/models/brand.dart';
 import 'package:desafio_mobcar/models/car.dart';
 import 'package:desafio_mobcar/models/car_price.dart';
@@ -6,7 +7,6 @@ import 'package:desafio_mobcar/models/model.dart';
 import 'package:desafio_mobcar/providers/brands_models_provider.dart';
 import 'package:desafio_mobcar/providers/cars_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 
 import 'button.dart';
@@ -66,10 +66,35 @@ class _CarFormWidgetState extends State<CarFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final _carsProvider = CarsProvider.of(context, listen: false);
+    final _carsProvider = CarsProvider(context: context, listen: false);
 
     return Column(
       children: [
+        Stack(
+          children: [
+            Container(
+              margin: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Image.asset(GeneralConstants.carImage),
+            ),
+            Positioned(
+              top: 16,
+              left: 16,
+              child: Row(
+                children: const [
+                  Icon(Icons.star, color: Colors.amber, size: 25),
+                  Icon(Icons.star, color: Colors.amber, size: 25),
+                  Icon(Icons.star, color: Colors.amber, size: 25),
+                  Icon(Icons.star, color: Colors.amber, size: 25),
+                  Icon(Icons.star_border_outlined, color: Colors.amber, size: 25),
+                ],
+              ),
+            ),
+          ],
+        ),
         Form(
           key: _formKey,
           child: Padding(
@@ -110,12 +135,10 @@ class _CarFormWidgetState extends State<CarFormWidget> {
                 Consumer<BrandsModelsProvider>(
                   builder: (context, carsProvider, child) {
                     int? _lastBrandCode;
-                    if (carsProvider.models.isEmpty && _brandId != null ||
-                        _lastBrandCode != _brandId) {
+                    if (carsProvider.models.isEmpty && _brandId != null || _lastBrandCode != _brandId) {
                       _lastBrandCode = _brandId;
 
-                      carsProvider.getModelsByIdBrand(
-                          codigoMarca: _brandId ?? 0);
+                      carsProvider.getModelsByIdBrand(codigoMarca: _brandId ?? 0);
                     }
                     return DropdownButtonFormField(
                       hint: const Text('Modelos'),
@@ -143,9 +166,7 @@ class _CarFormWidgetState extends State<CarFormWidget> {
                 Consumer<BrandsModelsProvider>(
                   builder: (context, brandsModelsProvider, child) {
                     int? _lastModelCode;
-                    if (brandsModelsProvider.carYear.isEmpty &&
-                            _modelId != null ||
-                        _lastModelCode != _modelId) {
+                    if (brandsModelsProvider.carYear.isEmpty && _modelId != null || _lastModelCode != _modelId) {
                       _lastModelCode = _modelId;
 
                       brandsModelsProvider.getCarYears(
@@ -156,8 +177,7 @@ class _CarFormWidgetState extends State<CarFormWidget> {
                     return DropdownButtonFormField(
                       hint: const Text('Anos'),
                       isExpanded: true,
-                      items:
-                          brandsModelsProvider.carYear.map((carYear) {
+                      items: brandsModelsProvider.carYear.map((carYear) {
                         return DropdownMenuItem(
                           value: carYear,
                           child: FittedBox(
@@ -200,8 +220,7 @@ class _CarFormWidgetState extends State<CarFormWidget> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Container(
                         margin: const EdgeInsets.all(12),
-                        child: const CircularProgressIndicator(
-                            color: Colors.black),
+                        child: const CircularProgressIndicator(color: Colors.black),
                       );
                     }
                     return TextFormField(
