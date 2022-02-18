@@ -2,7 +2,6 @@ import 'package:desafio_mobcar/models/car.dart';
 import 'package:desafio_mobcar/utils/actions_utils.dart';
 import 'package:flutter/material.dart';
 
-
 class PopUpMenuButton extends StatelessWidget {
   final Car car;
 
@@ -17,7 +16,7 @@ class PopUpMenuButton extends StatelessWidget {
             ActionsUtils.showCarDetailsDialog(
               context,
               car,
-              key!,
+              key,
             );
             break;
           case 2:
@@ -32,7 +31,7 @@ class PopUpMenuButton extends StatelessWidget {
             ActionsUtils.showDeleteCarConfirmationDialog(
               context,
               car,
-              key!,
+              key,
             );
             break;
         }

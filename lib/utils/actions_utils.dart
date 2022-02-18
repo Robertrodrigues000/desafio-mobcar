@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ActionsUtils {
-  static void showCarDetailsDialog(BuildContext context, Car car, Key key) {
+  static void showCarDetailsDialog(BuildContext context, Car car, Key? key) {
     showDialog(
       context: context,
       builder: (context) {
@@ -45,7 +45,7 @@ class ActionsUtils {
   static void showDeleteCarConfirmationDialog(
     BuildContext context,
     Car car,
-    Key key,
+    Key? key,
   ) {
     showDialog(
       context: context,
@@ -92,7 +92,7 @@ class ActionsUtils {
   }
 
   static void _ondDeleteCar(BuildContext context, Car car) {
-    CarsProvider(context: context, listen: false).delete(car);
+CarsProvider.of(context, listen: false).delete(car);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${car.modelo} removido com sucesso')),
     );

@@ -1,6 +1,8 @@
 import 'package:desafio_mobcar/constants/constants.dart';
 import 'package:desafio_mobcar/models/car.dart';
+import 'package:desafio_mobcar/screens/drawer_page.dart';
 import 'package:desafio_mobcar/utils/actions_utils.dart';
+import 'package:desafio_mobcar/utils/navigation_helper.dart';
 import 'package:desafio_mobcar/widgets/button.dart';
 import 'package:desafio_mobcar/widgets/cars_list.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
@@ -13,7 +15,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with NavigationHelper {
   final GlobalKey _scaffoldKey = new GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class _HomePageState extends State<HomePage> {
           Builder(
             builder: (context) => IconButton(
               icon: Icon(AntDesign.menu_unfold, color: AppColors.infoBlue),
-              onPressed: () => Scaffold.of(context).openDrawer(),
+                          onPressed: () =>
+                Navigator.pushAndRemoveUntil(context, createRoute(DrawerPage(key: widget.key)), (route) => true),
+
             ),
           ),
         ],
@@ -67,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Button(
-                            text: 'Adicionar Novo',
+                            text: 'Adicionar',
                             onTap: () {
                               ActionsUtils.showCarFormDialog(context, car: Car(), key: widget.key);
                             },

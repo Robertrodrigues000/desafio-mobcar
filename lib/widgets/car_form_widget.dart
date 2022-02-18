@@ -66,7 +66,7 @@ class _CarFormWidgetState extends State<CarFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final _carsProvider = CarsProvider(context: context, listen: false);
+    final _carsProvider = CarsProvider.of(context, listen: false);
 
     return Column(
       children: [

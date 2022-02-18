@@ -11,16 +11,16 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    
-    return MultiProvider(providers: [
-        ChangeNotifierProvider(create: (_) => CarsProvider(context: context)),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CarsProvider()),
         ChangeNotifierProvider(create: (_) => BrandsModelsProvider()),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'MobCar',
         theme: ThemeData(),
         home: HomePage(),
-        // debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
