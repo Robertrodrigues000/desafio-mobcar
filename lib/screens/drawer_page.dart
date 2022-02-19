@@ -1,6 +1,7 @@
 import 'package:desafio_mobcar/screens/menu_2.dart';
 import 'package:desafio_mobcar/screens/menu_3.dart';
 import 'package:desafio_mobcar/utils/navigation_helper.dart';
+import 'package:desafio_mobcar/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -58,24 +59,25 @@ class _DrawerPageState extends State<DrawerPage> with NavigationHelper {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        automaticallyImplyLeading: false,
-        leading: Container(
-          margin: const EdgeInsets.only(left: 16, top: 16),
-          child: const Text(
-            'MobCar',
-            style: TextStyle(color: Colors.blue, fontSize: 18),
-          ),
-        ),
-        leadingWidth: 100,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu_open_outlined),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.black,
+      //   automaticallyImplyLeading: false,
+      //   leading: Container(
+      //     margin: const EdgeInsets.only(left: 16, top: 16),
+      //     child: const Text(
+      //       'MobCar',
+      //       style: TextStyle(color: Colors.blue, fontSize: 18),
+      //     ),
+      //   ),
+      //   leadingWidth: 100,
+      //   actions: [
+      //     IconButton(
+      //       icon: const Icon(Icons.menu_open_outlined),
+      //       onPressed: () => Navigator.pop(context),
+      //     ),
+      //   ],
+      // ),
+      appBar: CustomAppBar(appBar: AppBar(), function: () => Navigator.pop(context)),
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Container(
@@ -101,8 +103,7 @@ class _DrawerPageState extends State<DrawerPage> with NavigationHelper {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text('© ',
-                        style: TextStyle(color: Colors.blue, fontSize: 22)),
+                    Text('© ', style: TextStyle(color: Colors.blue, fontSize: 22)),
                     Text(
                       ' 2020. All rights reserved to Mobcar.',
                       style: TextStyle(color: Colors.blue, fontSize: 14),
@@ -117,10 +118,7 @@ class _DrawerPageState extends State<DrawerPage> with NavigationHelper {
     );
   }
 
-  Widget _buildDrawerItem(
-      {required String itemTitle,
-      required bool isSelected,
-      required void Function() onTap}) {
+  Widget _buildDrawerItem({required String itemTitle, required bool isSelected, required void Function() onTap}) {
     final _textStyle = TextStyle(
       color: isSelected ? Colors.blue : Colors.white,
       fontSize: 18,

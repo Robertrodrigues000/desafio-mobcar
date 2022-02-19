@@ -1,6 +1,7 @@
 import 'package:desafio_mobcar/models/car.dart';
 import 'package:desafio_mobcar/utils/actions_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 
 class PopUpMenuButton extends StatelessWidget {
   final Car car;
@@ -10,6 +11,7 @@ class PopUpMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      icon: Icon(MaterialCommunityIcons.dots_vertical),
       onSelected: (value) {
         switch (value) {
           case 1:

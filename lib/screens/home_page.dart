@@ -5,6 +5,7 @@ import 'package:desafio_mobcar/utils/actions_utils.dart';
 import 'package:desafio_mobcar/utils/navigation_helper.dart';
 import 'package:desafio_mobcar/widgets/button.dart';
 import 'package:desafio_mobcar/widgets/cars_list.dart';
+import 'package:desafio_mobcar/widgets/custom_app_bar.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:flutter/material.dart';
 
@@ -21,19 +22,10 @@ class _HomePageState extends State<HomePage> with NavigationHelper {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        leading: Icon(Icons.ac_unit_sharp, color: AppColors.infoBlue),
-        actions: [
-          Builder(
-            builder: (context) => IconButton(
-              icon: Icon(AntDesign.menu_unfold, color: AppColors.infoBlue),
-                          onPressed: () =>
-                Navigator.pushAndRemoveUntil(context, createRoute(DrawerPage(key: widget.key)), (route) => true),
-
-            ),
-          ),
-        ],
+      appBar: CustomAppBar(
+        appBar: AppBar(),
+        function: () =>
+            Navigator.pushAndRemoveUntil(context, createRoute(DrawerPage(key: widget.key)), (route) => true),
       ),
       drawer: Drawer(
         child: Text("data"),
