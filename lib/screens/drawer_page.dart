@@ -58,63 +58,62 @@ class _DrawerPageState extends State<DrawerPage> with NavigationHelper {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.black,
-      //   automaticallyImplyLeading: false,
-      //   leading: Container(
-      //     margin: const EdgeInsets.only(left: 16, top: 16),
-      //     child: const Text(
-      //       'MobCar',
-      //       style: TextStyle(color: Colors.blue, fontSize: 18),
-      //     ),
-      //   ),
-      //   leadingWidth: 100,
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.menu_open_outlined),
-      //       onPressed: () => Navigator.pop(context),
-      //     ),
-      //   ],
-      // ),
-      appBar: CustomAppBar(appBar: AppBar(), function: () => Navigator.pop(context)),
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Container(
-          alignment: Alignment.topRight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              ListView.builder(
-                itemCount: drawerItems.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Container(
-                    alignment: Alignment.centerRight,
-                    child: drawerItems[index],
-                  );
-                },
-              ),
-              const Spacer(),
-              SizedBox(
-                height: 50,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text('© ', style: TextStyle(color: Colors.blue, fontSize: 22)),
-                    Text(
-                      ' 2020. All rights reserved to Mobcar.',
-                      style: TextStyle(color: Colors.blue, fontSize: 14),
-                    ),
-                  ],
+    return Stack(
+      children: [
+        Image.asset(
+          "assets/images/blackBackground.jpg",
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          appBar: CustomAppBar(appBar: AppBar(), function: () => Navigator.pop(context), isDrawer: true),
+          extendBodyBehindAppBar: true,
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/blackBackground.jpg"),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
+              alignment: Alignment.topRight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ListView.builder(
+                    itemCount: drawerItems.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        alignment: Alignment.centerRight,
+                        child: drawerItems[index],
+                      );
+                    },
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    height: 50,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('© ', style: TextStyle(color: Colors.blue, fontSize: 22)),
+                        Text(
+                          ' 2020. All rights reserved to Mobcar.',
+                          style: TextStyle(color: Colors.blue, fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 

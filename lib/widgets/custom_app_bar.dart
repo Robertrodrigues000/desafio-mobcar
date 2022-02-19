@@ -5,12 +5,15 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
   final VoidCallback function;
-  const CustomAppBar({Key? key, required this.appBar, required this.function}) : super(key: key);
+  final bool isDrawer;
+  const CustomAppBar({Key? key, required this.appBar, required this.function, required this.isDrawer})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.black,
+      backgroundColor: isDrawer ? Colors.transparent : Colors.black,
+      elevation: isDrawer ? 0 : 4,
       leading: Column(
         children: [
           Icon(MaterialCommunityIcons.steering, color: AppColors.infoBlue),

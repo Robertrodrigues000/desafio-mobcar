@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> with NavigationHelper {
       key: _scaffoldKey,
       appBar: CustomAppBar(
         appBar: AppBar(),
+        isDrawer: false,
         function: () =>
             Navigator.pushAndRemoveUntil(context, createRoute(DrawerPage(key: widget.key)), (route) => true),
       ),
