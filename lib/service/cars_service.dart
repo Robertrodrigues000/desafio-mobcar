@@ -9,9 +9,9 @@ class CarService {
   Future<Database> get _database async =>
       await DatabaseHelper.instance.database;
 
-  Future<Car> create(Car car) async {
+  Future<Car>? create(Car? car) async {
     try {
-      final resp = await (await _database).insert(tableName, car.toMap());
+      final resp = await (await _database).insert(tableName, car!.toMap());
       if (resp == 0) return Car();
       return car;
     } catch (e) {
@@ -19,12 +19,12 @@ class CarService {
     }
   }
 
-  Future<bool> delete(Car car) async {
+  Future<bool>? delete(Car? car) async {
     try {
       final result = await (await _database).delete(
         tableName,
         where: '$carId = ?',
-        whereArgs: [car.id],
+        whereArgs: [car!.id],
       );
       return result > 0;
     } catch (e) {
@@ -32,7 +32,7 @@ class CarService {
     }
   }
 
-  Future<Car> findById({required num id}) async {
+  Future<Car>? findById({required num id}) async {
     try {
       final rows = await (await _database).query(
         tableName,
@@ -45,22 +45,22 @@ class CarService {
     }
   }
 
-  Future<Car> update(Car car) async {
+  Future<Car>? update(Car? car) async {
     try {
       final res = await (await _database).update(
         tableName,
-        car.toMap(),
+        car!.toMap(),
         where: '$carId = ?',
         whereArgs: [car.id],
       );
       if (res == 0) return Car();
-      return await findById(id: car.id!);
+      return await findById(id: car.id!)!;
     } catch (e) {
       throw  e.toString();
     }
   }
 
-  Future<List<Car>> findAll() async {
+  Future<List<Car>>? findAll() async {
     try {
       final rows = await (await _database).query(tableName);
       return rows.map((e) => Car.fromMap(e)).toList();
