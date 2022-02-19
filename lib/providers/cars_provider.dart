@@ -4,13 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 class CarsProvider extends ChangeNotifier {
-  static CarsProvider of(BuildContext context, {listen = true}) =>
-      Provider.of<CarsProvider>(context, listen: listen);
+  static CarsProvider of(BuildContext context, {listen = true}) => Provider.of<CarsProvider>(context, listen: listen);
 
-      CarService _carService = CarService();
+  CarService _carService = CarService();
 
-  Future<List<Car>> get _data async =>
-      await _carService.findAll()!;
+  Future<List<Car>> get _data async => await _carService.findAll()!;
 
   Future<List<Car>> getCars() async {
     return _data;

@@ -24,7 +24,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_font_icons: ^2.2.3
-  flutter_modular: ^4.1.2
   google_fonts: ^2.1.0
   dio: ^4.0.0
   mocktail: ^0.1.4
@@ -32,6 +31,7 @@ dependencies:
   path_provider:
   provider: ^6.0.1
   mockito:
+  flutter_rating_bar: ^4.0.0
 
 
 

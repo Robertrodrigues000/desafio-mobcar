@@ -2,21 +2,16 @@ import 'package:desafio_mobcar/models/brand.dart';
 import 'package:desafio_mobcar/models/car_price.dart';
 import 'package:desafio_mobcar/models/car_year.dart';
 import 'package:desafio_mobcar/models/model.dart';
-import 'package:dio/dio.dart';
+import 'package:desafio_mobcar/service/brands_service.dart';
 import 'package:flutter/cupertino.dart';
 
 class BrandsModelsProvider extends ChangeNotifier {
-  Dio _dio = Dio();
   var _brands = <Brand>[];
   List<Brand> get brands => _brands;
+  BrandsService _brandsService = BrandsService();
 
   Future<List<Brand>> getBrands() async {
-    final response = await _dio.get(
-      'https://parallelum.com.br/fipe/api/v1/carros/marcas',
-    );
-    final brands = (response.data as List).map((row) => Brand.fromMap(row)).toList();
-
-    _brands = brands;
+    _brands= await _brandsService.getBrands();
     notifyListeners();
 
     return brands;
@@ -26,13 +21,8 @@ class BrandsModelsProvider extends ChangeNotifier {
   List<Model> get models => _models;
 
   Future<List<Model>> getModelsByIdBrand({@required codigoMarca}) async {
-    final response = await _dio.get(
-      'https://parallelum.com.br/fipe/api/v1/carros/marcas/$codigoMarca/modelos',
-    );
-
-    final mapData = response.data['modelos'];
-
-    final models = (mapData as List).map((map) => Model.fromMap(map)).toList();
+    final models = await _brandsService
+        .getModelsByIdBrand(codigoMarca: codigoMarca);
     _models = models;
     notifyListeners();
     return models;
@@ -45,10 +35,8 @@ class BrandsModelsProvider extends ChangeNotifier {
     required num idBrand,
     required num idModel,
   }) async {
-    final response = await _dio.get(
-      'https://parallelum.com.br/fipe/api/v1/carros/marcas/$idBrand/modelos/$idModel/anos',
-    );
-    final result = (response.data as List).map((map) => CarYear.fromMap(map)).toList();
+    final result = await _brandsService
+        .getCarYears(idBrand: idBrand, idModel: idModel);
     _carYear = result;
     notifyListeners();
     return result;
@@ -61,9 +49,8 @@ class BrandsModelsProvider extends ChangeNotifier {
     required num idModel,
     required String carYear,
   }) async {
-    final response =
-        await _dio.get('https://parallelum.com.br/fipe/api/v1/carros/marcas/$idBrand/modelos/$idModel/anos/$carYear');
-    final carPrice = CarPrice.fromMap(response.data);
+    final carPrice = await _brandsService
+        .getCarPrice(idBrand: idBrand, idModel: idModel, carYear: carYear);
     _carPrice = carPrice;
     return carPrice;
   }

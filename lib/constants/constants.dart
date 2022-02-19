@@ -8,9 +8,4 @@ class AppColors {
 class GeneralConstants {
   static const apiUrl = 'https://parallelum.com.br/fipe/api/v1/carros/marcas';
   static const carImage = "assets/images/car.jpg";
-
-  static const paddingSM = 2.0;
-  static const paddingMD = 4.0;
-  static const paddingLG = 8.0;
-  static const paddinXL = 12.0;
 }

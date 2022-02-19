@@ -1,4 +1,4 @@
-import 'package:desafio_mobcar/providers/brands_models_provider.dart';
+import 'package:desafio_mobcar/providers/brands_provider.dart';
 import 'package:desafio_mobcar/providers/cars_provider.dart';
 import 'package:desafio_mobcar/screens/home_page.dart';
 import 'package:flutter/material.dart';

@@ -4,11 +4,11 @@ import 'package:desafio_mobcar/screens/hero_image_page.dart';
 import 'package:desafio_mobcar/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CarDetailsDialogContentWidget extends StatelessWidget {
   final Car car;
-  const CarDetailsDialogContentWidget({required this.car, Key? key})
-      : super(key: key);
+  const CarDetailsDialogContentWidget({required this.car, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class CarDetailsDialogContentWidget extends StatelessWidget {
                           'Modelo',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(car.modelo?? ""),
+                        Text(car.modelo ?? ""),
                       ],
                     ),
                   ),
@@ -72,7 +72,7 @@ class CarDetailsDialogContentWidget extends StatelessWidget {
                           'Valor',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(car.valorFipe?? ""),
+                        Text(car.valorFipe ?? ""),
                       ],
                     ),
                   ),
@@ -116,8 +116,8 @@ class CarDetailsDialogContentWidget extends StatelessWidget {
   Widget _buildImageContainer(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => HeroImagePage(
-            title: car.modelo ?? "", child: Image.asset(GeneralConstants.carImage), tag: car.id ?? ""),
+        builder: (context) =>
+            HeroImagePage(title: car.modelo ?? "", child: Image.asset(GeneralConstants.carImage), tag: car.id ?? ""),
       )),
       child: carImageStack,
     );
@@ -134,18 +134,35 @@ class CarDetailsDialogContentWidget extends StatelessWidget {
             child: Image.asset(GeneralConstants.carImage),
           ),
           Positioned(
-            top: 16,
-            left: 16,
-            child: Row(
-              children: const [
-                Icon(Icons.star, color: Colors.amber, size: 25),
-                Icon(Icons.star, color: Colors.amber, size: 25),
-                Icon(Icons.star, color: Colors.amber, size: 25),
-                Icon(Icons.star, color: Colors.amber, size: 25),
-                Icon(Icons.star_border_outlined, color: Colors.amber, size: 25),
-              ],
-            ),
-          ),
+              top: 16,
+              left: 16,
+              //   child: Row(
+              //     children: const [
+              //       Icon(Icons.star, color: Colors.amber, size: 25),
+              //       Icon(Icons.star, color: Colors.amber, size: 25),
+              //       Icon(Icons.star, color: Colors.amber, size: 25),
+              //       Icon(Icons.star, color: Colors.amber, size: 25),
+              //       Icon(Icons.star_border_outlined, color: Colors.amber, size: 25),
+              //     ],
+              //   ),
+              child: RatingBar.builder(
+                initialRating: car.rate ?? 4.5,
+                minRating: 0.5,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemSize: 30,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                unratedColor: AppColors.warningYellow.withOpacity(0.5),
+                itemBuilder: (context, _) => Icon(
+
+                  Icons.star,
+                  color: AppColors.warningYellow,
+                ),
+                onRatingUpdate: (rating) {
+                  
+                },
+              )),
         ],
       );
 }

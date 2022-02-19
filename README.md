@@ -1,16 +1,27 @@
-# desafio_mobcar
+<h1 align="center">
+MobCar
+</h1>
 
-A new Flutter project.
+<p float="left"  align="center">
+  <img src="assets/images/listScreen.png" width="100" />
+  <img src="assets/images/registerScreen.png" width="100" /> 
+  <img src="assets/images/detailScreen.png" width="100" />
+  <img src="assets/images/drawer.png" width="100" /> 
+</p>
 
-## Getting Started
+## 🔖 Sobre
 
-This project is a starting point for a Flutter application.
+- O projeto **MobCar** é uma aplicação mobile onde é possível cadastrar carros detalhando a fabricante, modelo, ano e valor pela tabela FIPE. É possível listar, editar e apagar os dados dos carros favoritos que são armazenados no dispositivo. Ele usa um banco de dados público para acessar os carros e valores da tabela FIPE.
+## 🚀 Tecnologias
 
-A few resources to get you started if this is your first Flutter project:
+- Dart(Flutter)
+## Instalação
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```bash
+$ git clone https://github.com/Robertrodrigues000/desafio-mobcar.git
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+$ cd desafio-mobcar
+
+$ flutter run lib/main.dart
+
+```

@@ -4,9 +4,10 @@ import 'package:desafio_mobcar/models/car.dart';
 import 'package:desafio_mobcar/models/car_price.dart';
 import 'package:desafio_mobcar/models/car_year.dart';
 import 'package:desafio_mobcar/models/model.dart';
-import 'package:desafio_mobcar/providers/brands_models_provider.dart';
+import 'package:desafio_mobcar/providers/brands_provider.dart';
 import 'package:desafio_mobcar/providers/cars_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 import 'button.dart';
@@ -83,14 +84,20 @@ class _CarFormWidgetState extends State<CarFormWidget> {
             Positioned(
               top: 16,
               left: 16,
-              child: Row(
-                children: const [
-                  Icon(Icons.star, color: Colors.amber, size: 25),
-                  Icon(Icons.star, color: Colors.amber, size: 25),
-                  Icon(Icons.star, color: Colors.amber, size: 25),
-                  Icon(Icons.star, color: Colors.amber, size: 25),
-                  Icon(Icons.star_border_outlined, color: Colors.amber, size: 25),
-                ],
+              child: RatingBar.builder(
+                initialRating: 4.5,
+                minRating: 0.5,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemSize: 30,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                unratedColor: AppColors.warningYellow.withOpacity(0.6),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: AppColors.warningYellow,
+                ),
+                onRatingUpdate: (rating) => widget.car?.rate = rating,
               ),
             ),
           ],

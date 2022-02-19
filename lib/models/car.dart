@@ -6,12 +6,14 @@ class Car {
   String? modelo;
   String? ano;
   String? valorFipe;
+  double? rate;
   Car({
     this.id,
     this.fabricante,
     this.modelo,
     this.ano,
     this.valorFipe,
+    this.rate = 4.5,
   });
 
   Car copyWith({
@@ -20,14 +22,15 @@ class Car {
     String? modelo,
     String? ano,
     String? valorFipe,
+    double? rate,
   }) {
     return Car(
-      id: id ?? this.id,
-      fabricante: fabricante ?? this.fabricante,
-      modelo: modelo ?? this.modelo,
-      ano: ano ?? this.ano,
-      valorFipe: valorFipe ?? this.valorFipe,
-    );
+        id: id ?? this.id,
+        fabricante: fabricante ?? this.fabricante,
+        modelo: modelo ?? this.modelo,
+        ano: ano ?? this.ano,
+        valorFipe: valorFipe ?? this.valorFipe,
+        rate: rate ?? 4.5);
   }
 
   Map<String, dynamic> toMap() {
@@ -37,6 +40,7 @@ class Car {
       'modelo': modelo,
       'ano': ano,
       'valorFipe': valorFipe,
+      'rate': rate,
     };
   }
 
@@ -47,6 +51,7 @@ class Car {
       modelo: map['modelo'],
       ano: map['ano'],
       valorFipe: map['valorFipe'],
+      rate: map['rate'],
     );
   }
 
@@ -56,7 +61,7 @@ class Car {
 
   @override
   String toString() {
-    return 'Car(id: $id, fabricante: $fabricante, modelo: $modelo, ano: $ano, valorFipe: $valorFipe)';
+    return 'Car(id: $id, fabricante: $fabricante, modelo: $modelo, ano: $ano, valorFipe: $valorFipe, rate: $rate)';
   }
 
   @override
@@ -68,15 +73,12 @@ class Car {
         other.fabricante == fabricante &&
         other.modelo == modelo &&
         other.ano == ano &&
-        other.valorFipe == valorFipe;
+        other.valorFipe == valorFipe &&
+        other.rate == rate;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        fabricante.hashCode ^
-        modelo.hashCode ^
-        ano.hashCode ^
-        valorFipe.hashCode;
+    return id.hashCode ^ fabricante.hashCode ^ modelo.hashCode ^ ano.hashCode ^ valorFipe.hashCode ^ rate.hashCode;
   }
 }

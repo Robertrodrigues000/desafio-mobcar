@@ -6,13 +6,14 @@ import 'package:path_provider/path_provider.dart';
 
 class DatabaseHelper {
   static const _databaseName = "mobcar.db";
-  static const _databaseVersion = 1;
+  static const _databaseVersion = 2;
   static const table = 'cars';
   static const columnId = 'id';
   static const columnFabricante = 'fabricante';
   static const columnModelo = 'modelo';
   static const columnAno = 'ano';
   static const columnValorFipe = 'valorFipe';
+  static const columnRate = 'rate';
   // torna esta classe singleton
   DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
@@ -42,7 +43,8 @@ class DatabaseHelper {
             $columnFabricante TEXT NOT NULL,
             $columnModelo TEXT NOT NULL,
             $columnAno INTEGER NOT NULL,
-            $columnValorFipe NUMBER NOT NULL
+            $columnValorFipe NUMBER NOT NULL,
+            $columnRate DOUBLE
           )
           ''');
   }
